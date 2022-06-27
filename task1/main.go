@@ -2,31 +2,23 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 func main() {
 	arr := []int{4, 1, 4, -4, 6, 3, 8, 8}
 	var result []int
 
-	sort.Ints(arr)
-
 	for i := 0; i < len(arr); i++ {
-		if arr[i] > len(arr) {
-			result = append(result, arr[len(arr)-1])
-			break
-		}
-		if arr[i] == arr[i+1] {
-			copy(arr[i:], arr[i+1:])
-			arr[len(arr)-1] = 0
-			arr = arr[:len(arr)-1]
-		}
-		if arr[i] == arr[i+1] {
-			i--
-		} else if arr[i] != arr[i+1] {
-			result = append(result, arr[i])
+		for j := i + 1; j < len(arr); j++ {
+			if arr[i] == arr[j] {
+				copy(arr[j:], arr[j+1:])
+				arr[len(arr)-1] = 0
+				arr = arr[:len(arr)-1]
+			}
 		}
 	}
+
+	result = arr
 	fmt.Println(result)
 }
 
@@ -40,5 +32,8 @@ func main() {
 // func main(){
 //     arr := []int{4, 1, 4, -4, 6, 3, 8, 8}
 //     var result []int
-//     //     // тут має бути ваш код
+//     //...
+//     // тут має бути ваш код
 //     // змінна result в кінці функції має тримати слайс з вже видаленими дублікатами відповідно до правил
+//
+//
